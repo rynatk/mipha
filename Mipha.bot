@@ -1,5 +1,6 @@
 {
     "name": "Mipha",
+    "description": "",
     "services": [
         {
             "type": "endpoint",
@@ -10,6 +11,6 @@
             "id": "1"
         }
     ],
-    "padlock": "",
+    "padlock": "hL1O1//M59VAjbj+lTekwg==!d5nL0GTV+U1XKQnqFckeq8DGxu+QruRunFv67OVM1gcPmQ2puzfo7bDGUQAFO23b",
     "version": "2.0"
 }
