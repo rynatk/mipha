@@ -63,6 +63,8 @@ const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
 //     appPassword: endpointConfig.appPassword || process.env.microsoftAppPassword
 // });
 
+console.log([...process.env]);
+
 // ratkinson override
 const adapter = new BotFrameworkAdapter({
     appId: process.env.microsoftAppID,
@@ -90,8 +92,12 @@ const memoryStorage = new MemoryStorage();
 // Create conversation state with in-memory storage provider.
 const conversationState = new ConversationState(memoryStorage);
 
+console.log('Trying to make a bot');
+
 // Create the main dialog.
 const myBot = new MyBot(conversationState);
+
+console.log('Made a bot!');
 
 // Catch-all for errors.
 adapter.onTurnError = async (context, error) => {
