@@ -5,8 +5,8 @@
             "type": "endpoint",
             "name": "development",
             "endpoint": "http://localhost:3978/api/messages",
-            "appId": "3400fe9a-c51b-4f55-94ed-bfb35e29d23b",
-            "appPassword": "eeagfBWCF3luJML1036)#?#",
+            "appId": "",
+            "appPassword": "",
             "id": "1"
         }
     ],
