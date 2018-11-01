@@ -24,11 +24,10 @@ const env = require('dotenv').config({path: ENV_FILE});
 // See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration .
 const DEV_ENVIRONMENT = 'development';
 
+// Ratkinson - NODE_ENV = production on heroku deployment
 // bot name as defined in .bot file
 // See https://aka.ms/about-bot-file to learn more about .bot file its use and bot configuration.
 const BOT_CONFIGURATION = (process.env.NODE_ENV || DEV_ENVIRONMENT);
-
-console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 
 // Create HTTP server
 let server = restify.createServer();
@@ -39,27 +38,28 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 });
 
 // ratkinson test... this is supossed to be using an express server as an input
-directline.initializeRoutes(server, 3000, "http://127.0.0.1:3978/api/messages");
+// directline.initializeRoutes(server, 3000, "http://127.0.0.1:3978/api/messages");
 
+// ratkinson override 4 heroku
 // .bot file path
 // const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
-const BOT_FILE = path.join(__dirname, ('./Mipha.bot' || ''));
 
+// ratkinson override 4 heroku
 // Read bot configuration from .bot file.
-let botConfig;
-try {
-    // botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
-    botConfig = BotConfiguration.loadSync(BOT_FILE, 'jFgWkAhHjFvg9+mS2c921kAuJ4j04hXT9e2xvTBdozw=');
-} catch (err) {
-    console.error(`\nError reading bot file. Please ensure you have valid botFilePath and botFileSecret set for your environment.`);
-    console.error(`\n - The botFileSecret is available under appsettings for your Azure Bot Service bot.`);
-    console.error(`\n - If you are running this bot locally, consider adding a .env file with botFilePath and botFileSecret.\n\n`);
-    process.exit();
-}
+// let botConfig;
+// try {
+//     botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
+// } catch (err) {
+//     console.error(`\nError reading bot file. Please ensure you have valid botFilePath and botFileSecret set for your environment.`);
+//     console.error(`\n - The botFileSecret is available under appsettings for your Azure Bot Service bot.`);
+//     console.error(`\n - If you are running this bot locally, consider adding a .env file with botFilePath and botFileSecret.\n\n`);
+//     process.exit();
+// }
 
 // Get bot endpoint configuration by service name
-const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
+// const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
 
+// ratkinson override 4 heroku
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about .bot file its use and bot configuration .
 // const adapter = new BotFrameworkAdapter({
@@ -67,10 +67,9 @@ const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
 //     appPassword: endpointConfig.appPassword || process.env.microsoftAppPassword
 // });
 
-// ratkinson override
 const adapter = new BotFrameworkAdapter({
-    appId: '3400fe9a-c51b-4f55-94ed-bfb35e29d23b',
-    appPassword: 'eeagfBWCF3luJML1036)#?#',
+    appId: process.env.MICROSOFT_APP_ID,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD,
 });
 
 // Define state store for your bot.
