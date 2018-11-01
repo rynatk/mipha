@@ -40,12 +40,14 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 directline.initializeRoutes(server, 3000, "http://127.0.0.1:3978/api/messages");
 
 // .bot file path
-const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
+// const BOT_FILE = path.join(__dirname, (process.env.botFilePath || ''));
+const BOT_FILE = path.join(__dirname, ('./Mipha.bot' || ''));
 
 // Read bot configuration from .bot file.
 let botConfig;
 try {
-    botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
+    // botConfig = BotConfiguration.loadSync(BOT_FILE, process.env.botFileSecret);
+    botConfig = BotConfiguration.loadSync(BOT_FILE, 'jFgWkAhHjFvg9+mS2c921kAuJ4j04hXT9e2xvTBdozw=');
 } catch (err) {
     console.error(`\nError reading bot file. Please ensure you have valid botFilePath and botFileSecret set for your environment.`);
     console.error(`\n - The botFileSecret is available under appsettings for your Azure Bot Service bot.`);
